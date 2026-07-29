@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <div id="app" class="app" aria-live="polite">
+  <div id="app" class="app">
     <section id="title-screen" class="screen title-screen active" aria-labelledby="game-title">
       <div class="title-art" aria-hidden="true"></div>
       <div class="grain" aria-hidden="true"></div>
@@ -103,11 +103,13 @@
 
   <div id="modal" class="modal" hidden>
     <div class="modal-backdrop" data-close-modal></div>
-    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
       <header><h2 id="modal-title">设置</h2><button class="modal-close" data-close-modal aria-label="关闭">×</button></header>
       <div id="modal-content" class="modal-content"></div>
     </section>
   </div>
+
+  <div id="live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
 
   <noscript>本游戏需要启用 JavaScript。</noscript>
   <script src="assets/story.js"></script>

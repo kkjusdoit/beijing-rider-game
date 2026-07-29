@@ -48,7 +48,7 @@
       'meta-time', 'meta-weather', 'meta-place', 'meta-order',
       'speaker', 'fact-tag', 'dialogue', 'choices', 'progress-label', 'next-btn',
       'ending-title', 'timeline-btn', 'afterword-btn', 'restart-btn',
-      'modal', 'modal-title', 'modal-content'
+      'modal', 'modal-title', 'modal-content', 'live-region'
     ].forEach(function (id) { el[camel(id)] = document.getElementById(id); });
   }
   function camel(id) { return id.replace(/-(\w)/g, function (_, c) { return c.toUpperCase(); }); }
@@ -252,23 +252,38 @@
     var d = el.dialogue;
     d.classList.remove('complete');
     var speed = state.settings.typewriter ? SPEED[state.settings.speed] : 0;
-    if (speed === 0) { d.textContent = text; d.classList.add('complete'); return; }
+    if (reduceMotion || speed === 0) {
+      d.textContent = text;
+      d.classList.add('complete');
+      announceDialogue(text);
+      return;
+    }
     d.textContent = '';
     var i = 0;
     typing = setInterval(function () {
       // 逐字，遇到换行与标点稍作停顿由 CSS/节奏体现；这里保持匀速简洁
       d.textContent += text.charAt(i);
       i++;
-      if (i >= text.length) { clearTyping(); d.classList.add('complete'); }
+      if (i >= text.length) {
+        clearTyping();
+        d.classList.add('complete');
+        announceDialogue(text);
+      }
     }, speed);
   }
   function clearTyping() { if (typing) { clearInterval(typing); typing = null; } }
   function isTyping() { return typing !== null; }
+  function announceDialogue(text) {
+    if (!el.liveRegion) return;
+    var speaker = lastNode && lastNode.s ? lastNode.s + '：' : '旁白：';
+    el.liveRegion.textContent = speaker + (text || '');
+  }
   function finishTyping() {
     if (!lastNode) return;
     clearTyping();
     el.dialogue.textContent = lastNode.t || '';
     el.dialogue.classList.add('complete');
+    announceDialogue(lastNode.t || '');
   }
 
   /* ---------- 渲染节点 ---------- */
@@ -490,13 +505,31 @@
 
   /* ================= 弹窗 ================= */
 
+  var modalReturnFocus = null;
+
+  function modalFocusables() {
+    if (!el.modal) return [];
+    return Array.prototype.filter.call(el.modal.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    ), function (node) { return node.offsetParent !== null; });
+  }
+
   function openModal(title, node) {
+    modalReturnFocus = document.activeElement;
     el.modalTitle.textContent = title;
     el.modalContent.innerHTML = '';
     el.modalContent.appendChild(node);
     el.modal.hidden = false;
+    requestAnimationFrame(function () {
+      var focusables = modalFocusables();
+      (focusables[0] || el.modal).focus();
+    });
   }
-  function closeModal() { el.modal.hidden = true; }
+  function closeModal() {
+    el.modal.hidden = true;
+    if (modalReturnFocus && typeof modalReturnFocus.focus === 'function') modalReturnFocus.focus();
+    modalReturnFocus = null;
+  }
 
   function buildSettings() {
     var wrap = document.createElement('div');
@@ -704,7 +737,24 @@
       n.addEventListener('click', closeModal);
     });
     document.addEventListener('keydown', function (e) {
-      if (e.code === 'Escape' && !el.modal.hidden) closeModal();
+      if (el.modal.hidden) return;
+      if (e.code === 'Escape') {
+        e.preventDefault();
+        closeModal();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      var focusables = modalFocusables();
+      if (!focusables.length) { e.preventDefault(); return; }
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     });
 
     // 预加载序章与第一幕关键图，减少首次切换的空窗
