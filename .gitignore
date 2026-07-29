@@ -1,0 +1,15 @@
+# 图片生成中间件（PNG 原件，最终用的是 assets/images/*.webp）
+work/imagegen/*.png
+work/imagegen/*.json
+work/imagegen/*.txt
+work/imagegen/*.log
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 打包产物（游戏目录本身已在仓库里，zip 是冗余大二进制，按需本地生成）
+outputs/*.zip
+
+# 系统
+.DS_Store

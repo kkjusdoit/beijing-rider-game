@@ -1,0 +1,24 @@
+{
+  "style": "2017 Beijing, documentary cinematic illustration, painterly photoreal, muted desaturated palette, overcast rainy mood, soft 35mm film grain, natural available light. STRICT: no text, no watermarks, no logos, no readable brand names or signage; do NOT depict any recognizable real person's face; the protagonist (a slim young man, early 20s, cheap delivery raincoat) is always shown from behind, in silhouette, or first-person POV, face never clearly visible. Wide cinematic landscape framing.",
+  "size": "1536x1024",
+  "images": [
+    { "key": "01-arrival", "prompt": "A night train platform in Beijing, sodium-vapor lamps, a slim young man carrying luggage walking away from camera along the platform, tired but hopeful, humid summer night." },
+    { "key": "02-renmin", "prompt": "Afternoon outside a generic Chinese university gate (no readable signage), a brand-new electric delivery scooter parked at the curb, a young couple standing beside it seen from behind, warm proud moment." },
+    { "key": "03-newbike", "prompt": "A young man riding a new electric scooter along a wide multi-lane Beijing avenue, late afternoon light, back view, wind in his shirt, optimistic momentum." },
+    { "key": "04-gear", "prompt": "A drab suburban depot yard on an overcast morning, a young man collecting delivery gear and a uniform from cardboard boxes, isolated and small in the frame." },
+    { "key": "05-buaa-first", "prompt": "A university campus building at dusk, a delivery rider with an insulated food bag walking toward the entrance, back view, first delivery, quiet tension." },
+    { "key": "06-nightrain", "prompt": "3 a.m. light rain, a lone electric scooter parked under a residential apartment block, wet pavement reflecting a single streetlamp, nobody around, melancholy." },
+    { "key": "07-storm", "prompt": "A violent summer downpour near a leafy university campus, a delivery rider on an electric scooter soaked through a flimsy plastic raincoat, back view, headlights and rain streaks, cold and exhausted." },
+    { "key": "08-bridge", "prompt": "Under a concrete pedestrian overpass during a rainstorm, a rider sheltering, wiping a wet phone screen with the dry part of his shirt, grey light, water pouring beyond the shelter." },
+    { "key": "09-noodle", "prompt": "Interior of a cheap noodle shop, a small bowl of beef noodles steaming on a worn laminate table, rain-streaked window, a tired figure seated, muted warmth." },
+    { "key": "10-flattire", "prompt": "A wide street intersection at dusk in the rain, an electric scooter stopped at the roadside with an obviously flat rear tire, a young man crouching to check it, back view, headlights smearing." },
+    { "key": "11-lost", "prompt": "A tangle of highway flyover ramps at nightfall, a small figure on a shared bicycle lost among the interchanges, the river of car lights far below and out of reach, disorienting scale." },
+    { "key": "12-phonelost", "prompt": "Night, light rain near a bus stop, a young man frozen mid-step patting an empty chest pouch under his raincoat, dawning despair, back view, cold blue streetlight." },
+    { "key": "13-repair", "prompt": "Late night rain, a dim roadside scene, a young man pushing an electric scooter with a flat tire toward a tiny bike-repair stall lit by a bare bulb, an older stranger with a bicycle pointing the way." },
+    { "key": "14-mall", "prompt": "Interior of a crowded electronics mall, second-floor phone-selling floor, harsh cold fluorescent light, generic booths (no readable brands), a lone young customer facing intimidating vendors, tense and claustrophobic." },
+    { "key": "15-lastorder", "prompt": "An afternoon city street under bright sun after rain, a flustered delivery rider hurrying on foot with several food bags, harried body language, back view." },
+    { "key": "16-writing", "prompt": "Night, a thunderstorm and rain streaking the window, a young man at a small cramped desk writing in a notebook under a warm desk lamp, seen from behind and slightly to the side, introspective." },
+    { "key": "17-returnbike", "prompt": "Late afternoon at a plain depot near an outer district, a young man handing back an electric scooter, deflated posture, overcast, end-of-the-road mood." },
+    { "key": "18-mixian", "prompt": "A small roadside eatery in the evening, a bottle of beer and a bowl of crossing-bridge rice noodles on the table, a weary young man seated, warm tired relief after a hard day." }
+  ]
+}

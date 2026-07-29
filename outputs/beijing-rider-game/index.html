@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101418">
+  <meta name="description" content="根据一篇写于 2017 年的真实日记改编的纪实视觉小说。">
+  <title>我在北京挺好的：三日骑手</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div id="app" class="app" aria-live="polite">
+    <section id="title-screen" class="screen title-screen active" aria-labelledby="game-title">
+      <div class="title-art" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+      <div class="title-card">
+        <p class="eyebrow">一段真实经历 · 北京 · 2017</p>
+        <h1 id="game-title">我在北京挺好的</h1>
+        <p class="subtitle">三日骑手</p>
+        <p class="title-quote">“一部本来应该有开端、高潮、升华的正剧，<br>这么快便演成一部悲剧短片。”</p>
+        <div class="title-actions">
+          <button id="start-sound" class="primary-btn">带声音进入</button>
+          <button id="start-muted" class="secondary-btn">静音进入</button>
+          <button id="continue-btn" class="text-btn" hidden>继续上次经历</button>
+        </div>
+        <p class="title-note">建议佩戴耳机 · 自动保存 · 全程约 45–60 分钟</p>
+      </div>
+      <button id="open-warning" class="corner-link">内容提示</button>
+    </section>
+
+    <section id="warning-screen" class="screen warning-screen" aria-labelledby="warning-title">
+      <div class="warning-card">
+        <span class="warning-mark">!</span>
+        <p class="eyebrow">阅读之前</p>
+        <h2 id="warning-title">内容提示</h2>
+        <p>本作根据作者 2017 年的日记改编，涉及暴雨中的危险骑行、欺骗与辱骂、肢体威胁，以及一闪而过的轻生念头。画面不会呈现血腥内容，雷电效果也不会高频闪烁。</p>
+        <p>真实经历是唯一正史。所有假设选择都会以<span class="whatif-inline">“未发生的可能”</span>明确标注，不会与事实混淆。</p>
+        <button id="warning-back" class="primary-btn">我已了解</button>
+      </div>
+    </section>
+
+    <main id="game-screen" class="screen game-screen" aria-label="剧情游戏">
+      <div id="scene-bg" class="scene-bg" role="img" aria-label="剧情场景"></div>
+      <div class="scene-shade" aria-hidden="true"></div>
+      <canvas id="weather-canvas" aria-hidden="true"></canvas>
+      <div id="whatif-banner" class="whatif-banner" hidden>未发生的可能 · 非史实</div>
+
+      <header class="hud">
+        <div class="hud-brand">
+          <span id="chapter-number">序</span>
+          <div><small id="chapter-kicker">北京 · 2017</small><strong id="chapter-title">我在北京挺好的</strong></div>
+        </div>
+        <div class="hud-actions">
+          <button id="history-btn" class="icon-btn" aria-label="查看历史文本" title="历史文本">史</button>
+          <button id="chapters-btn" class="icon-btn" aria-label="章节选择" title="章节选择">章</button>
+          <button id="settings-btn" class="icon-btn" aria-label="设置" title="设置">设</button>
+        </div>
+      </header>
+
+      <aside class="status-panel" aria-label="当前状态">
+        <div class="status-grid">
+          <div class="stat"><span>体力</span><div class="meter"><i id="energy-meter"></i></div><b id="energy-value">100</b></div>
+          <div class="stat"><span>饥饿</span><div class="meter"><i id="hunger-meter"></i></div><b id="hunger-value">100</b></div>
+          <div class="stat"><span>意志</span><div class="meter"><i id="will-meter"></i></div><b id="will-value">85</b></div>
+          <div class="money-stat"><span>记录账面</span><b id="money-value">¥3,000</b></div>
+        </div>
+        <div class="scene-meta">
+          <span id="meta-time">2017.7.7 · 21:44</span>
+          <span id="meta-weather">雷雨</span>
+          <span id="meta-place">北京某小区某房间</span>
+          <span id="meta-order">日记</span>
+        </div>
+      </aside>
+
+      <section id="dialogue-wrap" class="dialogue-wrap">
+        <div class="dialogue-paper">
+          <div class="speaker-row"><span id="speaker">我</span><span id="fact-tag" class="fact-tag">真实记录</span></div>
+          <p id="dialogue" class="dialogue"></p>
+          <div id="choices" class="choices" hidden></div>
+          <div class="dialogue-footer">
+            <span id="progress-label">001 / 120</span>
+            <button id="next-btn" class="next-btn" aria-label="继续">继续 <span>→</span></button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section id="ending-screen" class="screen ending-screen" aria-labelledby="ending-title">
+      <div class="ending-rain" aria-hidden="true"></div>
+      <article class="ending-card">
+        <p class="eyebrow">2017.7.7 · 北京</p>
+        <h2 id="ending-title">太阳照常升起</h2>
+        <blockquote>“没什么过不去的坎，我会一直陪你的，<br>有困难我们共同面对。”</blockquote>
+        <p>故事没有逆袭，也没有报复。只是一个刚毕业的年轻人，在三天里付出了一笔昂贵的学费，然后决定重头再来。</p>
+        <div class="ending-actions">
+          <button id="timeline-btn" class="primary-btn">查看事实年表</button>
+          <button id="afterword-btn" class="secondary-btn">阅读原文后记</button>
+          <button id="restart-btn" class="text-btn">从头再来</button>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header><h2 id="modal-title">设置</h2><button class="modal-close" data-close-modal aria-label="关闭">×</button></header>
+      <div id="modal-content" class="modal-content"></div>
+    </section>
+  </div>
+
+  <noscript>本游戏需要启用 JavaScript。</noscript>
+  <script src="assets/story.js"></script>
+  <script src="assets/audio.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
