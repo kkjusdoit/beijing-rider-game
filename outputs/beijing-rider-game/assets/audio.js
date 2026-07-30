@@ -244,6 +244,14 @@
       if (ctx && ctx.state === 'suspended') ctx.resume();
     },
 
+    suspend: function () {
+      if (ctx && ctx.state === 'running') {
+        try { ctx.suspend(); } catch (e) {}
+      }
+      clearTimeout(thunderTimer);
+      clearTimeout(musicTimer);
+    },
+
     setMuted: function (m) {
       state.muted = !!m;
       if (!state.ready) return;
@@ -315,6 +323,18 @@
     isMuted: function () { return state.muted; },
     getVolume: function () { return state.volume; }
   };
+
+  /* ---------- 切页 / 锁屏自动挂起与恢复 ---------- */
+  document.addEventListener('visibilitychange', function () {
+    if (!state.ready) return;
+    if (document.hidden) {
+      api.suspend();
+    } else if (!state.muted) {
+      api.resume();
+      scheduleThunder();
+      scheduleMusic();
+    }
+  });
 
   window.GameAudio = api;
 })();
